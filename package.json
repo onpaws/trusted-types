@@ -1,0 +1,22 @@
+{
+  "name": "trustedtypes",
+  "version": "0.0.1",
+  "description": "TrustedTypes experiments, June 2020",
+  "main": "index.js",
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "keywords": [
+    "trusted types",
+    "security",
+    "chrome",
+    "google",
+    "web"
+  ],
+  "author": "paws",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "rollup": "^2.12.0"
+  },
+  "type": "module"
+}

@@ -1,0 +1,33 @@
+# Enforce for public pages only (b/c WordPress admin has lots of legacy DOM mutations)
+<IfModule unique_id_module>
+<If "%{REQUEST_URI} =~ m#^/blog/wp-admin/#">
+	Header set Content-Security-Policy-Report-Only "script-src 'strict-dynamic' 'nonce-%{UNIQUE_ID}e' 'unsafe-inline' http: https:;\
+object-src 'none'; base-uri 'none'; frame-ancestors 'none';\
+require-trusted-types-for 'script';\
+trusted-types paws;\
+report-uri https://yoursubdomain.report-uri.com/r/d/csp/reportOnly"
+</If>
+<Else>
+Header set Content-Security-Policy "default-src 'none'; script-src 'self' 'nonce-%{UNIQUE_ID}e' 'unsafe-inline' 'strict-dynamic' https: http:; style-src 'self'; img-src secure.gravatar.com 'self' https: http:; font-src 'self' data:; frame-src docs.google.com spreadsheets.google.com; object-src 'none'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; require-trusted-types-for 'script'; trusted-types paws; report-uri https://yoursubdomain.report-uri.com/r/d/csp/enforce"
+</Else>
+</IfModule>
+
+# Prevent browsers from incorrectly detecting non-scripts as scripts
+Header add X-Content-Type-Options: nosniff
+
+# Block site from being framed
+#Header add X-Frame-Options: DENY
+# CSPs frame-ancestors takes precedence per 
+# https://stackoverflow.com/questions/54249080/content-security-policy-for-frame-frame-src-vs-frame-ancestors
+
+# Block pages from loading when they detect reflected XSS attacks
+Header add X-XSS-Protection: 1;mode=block
+
+# Force SSL
+Header add Strict-Transport-Security: "max-age=31536000; includeSubDomains; preload"
+
+# Referrer Policy
+Header add Referrer-Policy: no-referrer-when-downgrade
+
+# Feature Policy
+Header add Feature-Policy: "sync-xhr 'none'"
