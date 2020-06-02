@@ -1,0 +1,11 @@
+/*
+ Theme Name:   paws Twentytwenty Child 
+ Theme URI:    https://www.example.com/
+ Description:  A Twenty Twenty child theme to suppress emoji stuff and experiment with CSP
+ Author:	   paws 
+ Author URI:   https://www.onpaws.com
+ Template:     twentytwenty
+ Version:      0.0.1
+*/
+
+@import url("../twentytwenty/style.css");
