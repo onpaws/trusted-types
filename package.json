@@ -16,7 +16,7 @@
   "author": "paws",
   "license": "UNLICENSED",
   "devDependencies": {
-    "rollup": "^2.12.0"
+    "rollup": "^2.34.2"
   },
   "type": "module"
 }
